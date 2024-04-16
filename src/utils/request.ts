@@ -1,4 +1,9 @@
-import { CANDIDATE_ID, defaultHeaders } from '../constants';
+import {
+  CANDIDATE_ID,
+  CHUNK_SIZE,
+  REQUEST_DELAY,
+  defaultHeaders,
+} from '../constants';
 import { HttpMethods, MetaVerseRequest, Request } from '../types';
 import { fetchData } from './fetch';
 
@@ -7,6 +12,7 @@ export const createMetaverseRequestData = ({
   method,
   headers = defaultHeaders,
   planet,
+  additionalData = {},
 }: MetaVerseRequest) => ({
   method: method || HttpMethods.POST,
   headers,
@@ -14,14 +20,15 @@ export const createMetaverseRequestData = ({
     row,
     column,
     candidateId: CANDIDATE_ID,
+    ...additionalData,
   }),
-  planet,
+  path: planet,
 });
 
 export const makeRequestsWithDelay = async (
   requests: Request[],
-  chunkSize: number,
-  delay: number
+  chunkSize: number | undefined = CHUNK_SIZE,
+  delay: number | undefined = REQUEST_DELAY
 ) => {
   const chunks = Math.ceil(requests.length / chunkSize);
   const responses: object[] = [];

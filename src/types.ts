@@ -8,11 +8,18 @@ export enum PLANETS {
   COMETHS = 'comeths',
 }
 
+export enum PLANET {
+  EMPTY = 'SPACE',
+  POLYANET = 'POLYANET',
+  SOLOON = 'SOLOON',
+  COMETH = 'COMETH',
+}
+
 export type Request = {
   method: HttpMethods;
   headers: Record<string, string>;
   body: string;
-  planet: PLANETS;
+  path: PLANETS;
 };
 
 export type MetaVerseRequest = {
@@ -20,4 +27,7 @@ export type MetaVerseRequest = {
   method: HttpMethods;
   headers?: Record<string, string>;
   planet: PLANETS;
+  additionalData?: Record<string, string>;
 };
+
+export type CoordinatesMap = Record<string, number[][]>;
