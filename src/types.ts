@@ -31,3 +31,5 @@ export type MetaVerseRequest = {
 };
 
 export type CoordinatesMap = Record<string, number[][]>;
+
+export type Matrix = string[][];

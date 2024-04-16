@@ -1,6 +1,7 @@
 import {
   CoordinatesMap,
   HttpMethods,
+  Matrix,
   PLANET,
   PLANETS,
   Request,
@@ -9,7 +10,6 @@ import {
   createMetaverseRequestData,
   makeRequestsWithDelay,
 } from '../utils/request';
-import { phase2 } from './__tests__/__mocks__/phase2.goal';
 
 /**
  * Returns a map of coordinates for each planet in the given matrix.
@@ -82,9 +82,9 @@ export const createMetaverseRequestDataPhase2 = (
  *
  * @return {Request[]} An array of metaverse requests.
  */
-export const createPlanets = () => {
+export const createPlanets = (matrix: Matrix) => {
   // Create matrix to get coordinates
-  const coordinates = getMapCoordinatesOfGivenMatrix(phase2);
+  const coordinates = getMapCoordinatesOfGivenMatrix(matrix);
 
   // Create metaverse phase 2 - Planets - generate requests to API
   const requests = createMetaverseRequestDataPhase2(coordinates);
@@ -97,9 +97,9 @@ export const createPlanets = () => {
  *
  * @return {Promise} An array of metaverse requests with delay.
  */
-export const createMetaversePhase2 = async () => {
+export const createMetaversePhase2 = async (matrix: Matrix) => {
   // Create Planets requests to make API requests
-  const metaverseRequests = createPlanets();
+  const metaverseRequests = createPlanets(matrix);
 
   // Make requests to API with delay
   return await makeRequestsWithDelay(metaverseRequests);
