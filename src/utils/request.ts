@@ -40,7 +40,9 @@ export const makeRequestsWithDelay = async (
 
     responses.push(
       await Promise.all(
-        chunk.map(async request => await fetchData<object>(request))
+        chunk.map(
+          async request => await fetchData<object>(request.path, request)
+        )
       )
     );
 
